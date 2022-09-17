@@ -12,9 +12,12 @@ import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { THEME } from '../../theme'
 import { Heading } from '../../components/Heading/Heading'
 import { DuoCard, IDuoCardProps } from '../../components/DuoCard/DuoCard'
+import { DuoMatch } from '../../components/DuoMatch/DuoMatch'
 
 export function Game() {
   const [duos, setDuos] = useState<IDuoCardProps[]>([])
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('false')
+
   const route = useRoute()
   const game = route.params as IGameParams
   const navigation = useNavigation()
@@ -65,6 +68,11 @@ export function Game() {
           contentContainerStyle={[
             duos.length > 0 ? styles.contentList : styles.emptyListContent
           ]}
+        />
+        <DuoMatch
+          visible={discordDuoSelected.length > 0}
+          discord='exemplo#142424'
+          onClose={() => setDiscordDuoSelected('')}
         />
       </SafeAreaView>
     </Background>
